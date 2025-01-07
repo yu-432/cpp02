@@ -6,24 +6,35 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:05:17 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/03 16:25:27 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:45:20 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <cmath>
 
 class Fixed {
 	public:
 		Fixed();
 		Fixed(const Fixed& src);
+		Fixed(const int value);
+		Fixed(const float value);
+		Fixed& operator = (const Fixed& src);
+		bool operator > (const Fixed& right);
+		bool operator < (const Fixed& right);
+		bool operator >= (const Fixed& right);
+		bool operator <= (const Fixed& right);
+		bool operator != (const Fixed& right);
 		~Fixed();
-		Fixed&	operator = (const Fixed& src);
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
-		Fixed&	operator << (const Fixed& src);
+		float	toFloat(void) const;
+		int		toInt(void) const;
 	private:
 		int					m_value;
 		static const int	fractBits = 8;
 };
+
+std::ostream& operator << (std::ostream& ostream, const Fixed& src);
