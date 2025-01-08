@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:05:17 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/04 14:04:50 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:26:47 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Fixed {
 		float	toFloat(void) const;
 		int		toInt(void) const;
 	private:
-		int					m_value;
+		int					rawBits;
 		static const int	fractBits = 8;
 };
 

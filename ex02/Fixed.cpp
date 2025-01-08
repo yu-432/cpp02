@@ -6,75 +6,127 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:00:55 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/06 20:47:12 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/08 18:36:43 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed() : m_value(0) {
-	std::cout << "Default constructor called" << std::endl;
+Fixed::Fixed() : rawBits(0) {
 }
 
 Fixed::Fixed(const Fixed& src) {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
 Fixed::Fixed(const int value) {
-	std::cout << "Int constructor called" << std::endl;
-	this->m_value = value << this->fractBits;
+	this->setRawBits(value << this->fractBits);
 }
 
 Fixed::Fixed(const float value) {
-	std::cout << "Float constructor called" << std::endl;
-	this->m_value = roundf(value * (1 << this->fractBits));
+	this->setRawBits(roundf(value * (1 << this->fractBits)));
 }
 
-Fixed& Fixed::operator=(const Fixed& src) {
-	std::cout << "Copy assignment operator called" << std::endl;
+Fixed& Fixed::operator = (const Fixed& src) {
 	this->setRawBits(src.getRawBits());
 	return *this;
 }
 
-bool Fixed::operator>(const Fixed& right) {
-	return this->fractBits > right.m_value;
+bool Fixed::operator > (const Fixed& right) {
+	return this->getRawBits() > right.getRawBits();
 }
 
-bool Fixed::operator<(const Fixed& right) {
-	return this->fractBits < right.m_value;
+bool Fixed::operator < (const Fixed& right) {
+	return this->getRawBits() < right.getRawBits();
 }
 
-bool Fixed::operator>=(const Fixed& right) {
-	return this->fractBits >= right.m_value;
+bool Fixed::operator >= (const Fixed& right) {
+	return this->getRawBits() >= right.getRawBits();
 }
 
-bool Fixed::operator<=(const Fixed& right) {
-	return this->fractBits <= right.m_value;
+bool Fixed::operator <= (const Fixed& right) {
+	return this->getRawBits() <= right.getRawBits();
 }
 
-bool Fixed::operator!=(const Fixed& right) {
-	return this->fractBits != right.m_value;
+bool Fixed::operator != (const Fixed& right) {
+	return this->getRawBits() != right.getRawBits();
+}
+
+Fixed Fixed::operator + (const Fixed& right) {
+	Fixed res(this->toFloat() + right.toFloat());
+	return res;
+}
+
+Fixed Fixed::operator - (const Fixed& right) {
+	Fixed res(this->toFloat() - right.toFloat());
+	return res;
+}
+
+Fixed Fixed::operator * (const Fixed& right) {
+	Fixed res(this->toFloat() * right.toFloat());
+	return res;
+}
+
+Fixed Fixed::operator / (const Fixed& right) {
+	Fixed res(this->toFloat() / right.toFloat());
+	return res;
+}
+
+Fixed& Fixed::operator ++ () {
+	this->setRawBits(this->getRawBits()+1);
+	return *this;
+}
+
+Fixed Fixed::operator ++ (int) {
+	Fixed temp = *this;
+	this->setRawBits(this->getRawBits()+1);
+	return temp;
+}
+
+Fixed& Fixed::operator -- () {
+	this->setRawBits(this->getRawBits()-1);
+	return *this;
+}
+
+Fixed Fixed::operator -- (int) {
+	Fixed temp = *this;
+	this->setRawBits(this->getRawBits()-1);
+	return temp;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b) {
+	return (a.getRawBits() < b.getRawBits()) ? a : b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+	return (a.getRawBits() < b.getRawBits()) ? a : b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b) {
+	return (a.getRawBits() > b.getRawBits()) ? a : b;
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+	return (a.getRawBits() > b.getRawBits()) ? a : b;
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const {
-	return this->m_value;
+	return this->rawBits;
 }
 
 void	Fixed::setRawBits(int const raw) {
-	this->m_value = raw;
+	this->rawBits = raw;
 }
 
 float	Fixed::toFloat(void) const {
-	return this->m_value / 256.0;
+	return this->getRawBits() / 256.0;
 }
 
 int		Fixed::toInt(void) const {
-	return this->m_value >> this->fractBits;
+	return this->getRawBits() >> this->fractBits;
 }
 
 std::ostream&	operator << (std::ostream& ostream, const Fixed& src) {
