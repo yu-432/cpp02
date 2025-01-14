@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 21:58:46 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/09 12:29:56 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:26:28 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@ int main(void) {
   std::cout << b << std::endl;
 
   std::cout << Fixed::max(a, b) << std::endl;
+  std::cout << "----------------" << std::endl;
+  Fixed c(Fixed(5.05f) + Fixed(2));
+  Fixed d(Fixed(10.00f) / Fixed(3));
+
+  std::cout << c << std::endl;
+  std::cout << d << std::endl;
   return 0;
 }

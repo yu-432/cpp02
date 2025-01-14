@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:05:17 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/14 17:12:49 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:25:57 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ class Fixed {
  public:
   Fixed();
   Fixed(const Fixed& src);
-  ~Fixed();
   Fixed& operator=(const Fixed& src);
+  ~Fixed();
   void setRawBits(int const raw);
   int getRawBits(void) const;
 
