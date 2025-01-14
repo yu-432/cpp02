@@ -6,30 +6,31 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:05:17 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/07 13:26:47 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:18:46 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 class Fixed {
-	public:
-		Fixed();
-		Fixed(const Fixed& src);
-		Fixed(const int value);
-		Fixed(const float value);
-		Fixed& operator = (const Fixed& src);
-		~Fixed();
-		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-		float	toFloat(void) const;
-		int		toInt(void) const;
-	private:
-		int					rawBits;
-		static const int	fractBits = 8;
+ public:
+  Fixed();
+  Fixed(const Fixed& src);
+  Fixed(const int value);
+  Fixed(const float value);
+  Fixed& operator=(const Fixed& src);
+  ~Fixed();
+  void setRawBits(int const raw);
+  int getRawBits(void) const;
+  int toInt(void) const;
+  float toFloat(void) const;
+
+ private:
+  int _rawBits;
+  static const int _fractBits = 8;
 };
 
-std::ostream& operator << (std::ostream& ostream, const Fixed& src);
+std::ostream& operator<<(std::ostream& ostream, const Fixed& src);

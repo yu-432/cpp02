@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:05:17 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/07 13:26:47 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:12:49 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include <iostream>
 
 class Fixed {
-	public:
-		Fixed();
-		Fixed(const Fixed& src);
-		~Fixed();
-		Fixed&	operator = (const Fixed& src);
-		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-		Fixed&	operator << (const Fixed& src);
-	private:
-		int					rawBits;
-		static const int	fractBits = 8;
+ public:
+  Fixed();
+  Fixed(const Fixed& src);
+  ~Fixed();
+  Fixed& operator=(const Fixed& src);
+  void setRawBits(int const raw);
+  int getRawBits(void) const;
+
+ private:
+  int _rawBits;
+  static const int _fractBits = 8;
 };
