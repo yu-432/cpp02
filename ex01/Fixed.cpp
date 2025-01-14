@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:00:55 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/14 16:31:07 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:54:30 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Fixed::Fixed(const float value) {
 
 Fixed& Fixed::operator=(const Fixed& src) {
   std::cout << "Copy assignment operator called" << std::endl;
-  _rawBits = src._rawBits;
+  if (this != &src) _rawBits = src.getRawBits();
   return *this;
 }
 
@@ -43,7 +43,9 @@ int Fixed::getRawBits(void) const { return _rawBits; }
 
 void Fixed::setRawBits(int const raw) { _rawBits = raw; }
 
-float Fixed::toFloat(void) const { return static_cast<float>(_rawBits) / (1 << _fractBits); }
+float Fixed::toFloat(void) const {
+  return static_cast<float>(_rawBits) / (1 << _fractBits);
+}
 
 int Fixed::toInt(void) const { return _rawBits >> _fractBits; }
 
