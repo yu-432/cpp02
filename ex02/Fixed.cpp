@@ -6,7 +6,7 @@
 /*   By: yooshima <yooshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:00:55 by yooshima          #+#    #+#             */
-/*   Updated: 2025/01/14 20:54:03 by yooshima         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:47:04 by yooshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ Fixed Fixed::operator-(const Fixed& right) {
 }
 
 Fixed Fixed::operator*(const Fixed& right) {
-  Fixed res(toFloat() * right.toFloat());
   Fixed res;
   res._rawBits = (_rawBits * right._rawBits) >> _fractBits;
   return res;
